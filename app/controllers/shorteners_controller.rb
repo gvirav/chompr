@@ -5,6 +5,8 @@ class ShortenersController < ApplicationController
   end
 
   def show
+    @shortener = Shortener.find(params[:id])
+    redirect_to @shortener.url
   end
 
   def new

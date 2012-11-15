@@ -2,6 +2,10 @@ UrlShortener::Application.routes.draw do
   root :to => 'shorteners#index'
 
   resources :shorteners
+
+  match '/:short_url' => 'shorteners#show'
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
