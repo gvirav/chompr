@@ -3,6 +3,7 @@ class CreateShorteners < ActiveRecord::Migration
     create_table :shorteners do |t|
       t.string :url
       t.string :short_url
+      t.integer :visit_count, :default => 0
 
       t.timestamps
     end

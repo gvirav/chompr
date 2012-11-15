@@ -1,22 +1,22 @@
 <h1> Welcome To Your Doom </h1>
 
 <%= form_for @shortener do |f| %>
- 	<%= f.label :url %>
- 	<%= f.text_field :url %>
+ 	<%= f.text_field :url, :value => 'http://' %>
 
- 	<%= f.submit %>
-
+ 	<%= f.submit 'Doomifier' %>
  <% end %>
 
 
  <table cellpadding="5" >
  	<th>Original URL</th>
  	<th>Shortened URL</th>
+ 	<th>Visit Count</th>
 
  <% @shorteners.each do |url| %>
  <tr>
-	<td> <%= url.url %> &rarr; </td>
-	<td> <%= link_to("#{url.short_url}", "#{url.url}") %> </td>
+	<td align='center'> <%= url.url %> &rarr; </td>
+	<td align='center'> <%= link_to("#{url.short_url}", "http://localhost:3000/#{url.short_url}") %> </td>
+	<td align='center'> <%= url.visit_count %>
 </tr>
 
 <% end %>
