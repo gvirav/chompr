@@ -1,14 +1,7 @@
 UrlShortener::Application.routes.draw do
-  get "shorteners/index"
+  root :to => 'shorteners#index'
 
-  get "shorteners/show"
-
-  get "shorteners/new"
-
-  get "shorteners/create"
-
-  get "shorteners/destroy"
-
+  resources :shorteners
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
