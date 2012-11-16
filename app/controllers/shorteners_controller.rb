@@ -1,7 +1,13 @@
 class ShortenersController < ApplicationController
+  # before_filter :login_required
+
   def index
     @shortener = Shortener.new
-    @shorteners = Shortener.all
+    if logged_in?
+      @shorteners = current_user.shorteners
+    else
+      @shorteners = Shortener.recent
+    end
   end
 
   def show
@@ -19,7 +25,9 @@ class ShortenersController < ApplicationController
   end
 
   def create
-    @shortener = Shortener.new(params[:shortener])
+    shortener_params = params[:shortener]
+    shortener_params[:user_id] = current_user.id
+    @shortener = Shortener.new(shortener_params) 
     @shortener.shortener
     if @shortener.save
       redirect_to shorteners_path 

@@ -1,13 +1,21 @@
 <div align='center'>
-
+	<div align='right'>
+	<% if logged_in? %>
+	<%= link_to 'Log Out', logout_path %>
+	<br><%= current_user.email %></br>
+	<% else %>
+	<%= link_to 'Sign Up', signup_path %>
+	<%= link_to 'Log In', login_path %>
+	<% end %>
+	</div>
 <br>
-<h1> Welcome To Your Doom </h1>
+<h1> chomp.er </h1>
 </br>
 
 <%= form_for @shortener do |f| %>
  	<%= f.text_field :url, :value => 'http://' %>
 
- 	<%= f.submit 'Doomifier' %>
+ 	<%= f.submit 'chomp it' %>
  <% end %>
 
 
@@ -24,7 +32,6 @@
 	<td align='center'> <%= link_to("#{url.short_url}", "http://localhost:3000/#{url.short_url}") %> </td>
 	<td align='center'> <%= url.visit_count %>
 </tr>
-
 <% end %>
 
 </table>
