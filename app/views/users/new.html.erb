@@ -1,5 +1,26 @@
-<h1>Sign up</h1>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+    	<a class="brand" href="http://localhost:3000">chomp.er</a>
+    	<ul class="nav pull-right">
+    	<li><a href="http://localhost:3000">Home</a></li>
+    		<% if logged_in? %>
+    			<li>
+    			<li><a href='/user/edit'><%= current_user.email %></a></li>
+    			<li><a href='/logout'>Log out</a></li>
+    		<% else %>
+    		<li class="active"><a href='/signup'>Sign up</a></li>
+    		<li><a href='/login'>Log in</a></li>
+    		<% end %>
+    	</ul>
+    </div>
+</div>
 
-<p>Already have an account? <%= link_to "Log in", login_path %>.</p>
+<div class='login'>
+	<h1>Sign up</h1>
 
-<%= render 'form' %>
+	<p>Already have an account? <%= link_to "Log in", login_path %>.</p>
+
+	<%= render 'form' %>
+
+</div>
+

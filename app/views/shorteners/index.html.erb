@@ -1,39 +1,49 @@
-<div align='center'>
-	<div align='right'>
-	<% if logged_in? %>
-	<%= link_to 'Log Out', logout_path %>
-	<br><%= current_user.email %></br>
-	<% else %>
-	<%= link_to 'Sign Up', signup_path %>
-	<%= link_to 'Log In', login_path %>
-	<% end %>
-	</div>
-<br>
-<h1> chomp.er </h1>
-</br>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+    	<a class="brand" href="http://localhost:3000">chomp.er</a>
+    	<ul class="nav pull-right">
+    	<li class="active"><a href="#">Home</a></li>
+    		<% if logged_in? %>
+    			<li>
+    			<li><a href='/user/edit'><%= current_user.email %></a></li>
+    			<li><a href='/logout'>Log out</a></li>
+    		<% else %>
+    		<li><a href='/signup'>Sign up</a></li>
+    		<li><a href='/login'>Log in</a></li>
+    		<% end %>
+    	</ul>
+    </div>
+</div>
 
+<div id ="container">
+
+<div id='title'>
+	<h1> chomp.er </h1>
+</div>
+
+<div id='text-field'>
 <%= form_for @shortener do |f| %>
  	<%= f.text_field :url, :value => 'http://' %>
-
- 	<%= f.submit 'chomp it' %>
+ 	
+ 	<%= f.submit class:"btn btn-medium btn-primary", type:"submit", value:"chomp it", name:"commit" %>
  <% end %>
-
-
- <table cellpadding="5" >
- 	<br>
- 	<th>Original URL</th>
- 	<th>Shortened URL</th>
- 	<th>Visit Count</th>
- 	</br>
-
- <% @shorteners.each do |url| %>
- <tr>
-	<td align='center'> <%= url.url %> &rarr; </td>
-	<td align='center'> <%= link_to("#{url.short_url}", "http://localhost:3000/#{url.short_url}") %> </td>
-	<td align='center'> <%= url.visit_count %>
-</tr>
-<% end %>
-
-</table>
-
+</div>
+<table class="table table-striped">  
+        <thead>  
+          <tr>  
+            <th>Original URL</th>  
+            <th>Shortened Link</th>  
+            <th>Visit Count</th>  
+          </tr>  
+        </thead>  
+        <tbody>
+        <% @shorteners.each do |url| %>  
+          <tr>  
+            <td><%= url.url %></td>  
+            <td><%= link_to("#{url.short_url}", "http://localhost:3000/#{url.short_url}") %> </td>  
+            <td><%= url.visit_count %></td> 
+          </tr>
+        <% end %>
+        </tbody>  
+</table> 
 </div>

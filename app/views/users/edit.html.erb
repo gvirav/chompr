@@ -1,3 +1,22 @@
-<% title "Update Profile" %>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+    	<a class="brand" href="http://localhost:3000">chomp.er</a>
+    	<ul class="nav pull-right">
+    	   <li><a href="http://localhost:3000">Home</a></li>
+    		<% if logged_in? %>
+    			<li>
+    			<li class="active"><a href='/user/edit'><%= current_user.email %></a></li>
+    			<li><a href='/logout'>Log out</a></li>
+    		<% else %>
+    		<li><a href='/signup'>Sign up</a></li>
+    		<li><a href='/login'>Log in</a></li>
+    		<% end %>
+    	</ul>
+    </div>
+</div>
+
+<div class='login'>
+<h1>Update Profile</h1>
 
 <%= render 'form' %>
+</div>

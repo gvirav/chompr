@@ -17,9 +17,6 @@ class ShortenersController < ApplicationController
     redirect_to @shortener.url
   end
 
-  def new
-  end
-
   def edit
     @shortener = Shortener.find(params[:id])
   end
@@ -32,24 +29,9 @@ class ShortenersController < ApplicationController
     if @shortener.save
       redirect_to shorteners_path 
     else
-      flash[:error] = "Invalid URL! URL must begin with http:// or https://"
+      flash[:notice] = "Please log in or sign up!"
       redirect_to shorteners_path
     end
   end
 
-  def destroy
-  end
-
-  # def update
-  #   @shortener = Shortener.find(params[:visit_count])
-  #   respond_to do |format|
-  #     if @shortener.update_attributes("visit_count", @shortener.visit_count + 1)
-  #       format.html { redirect_to shorteners_path }
-  #       format.json { head :no_content }
-  #     else
-  #       format.html { render action: "edit" }
-  #       format.json { render json: @shortener.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
 end
