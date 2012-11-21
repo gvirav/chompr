@@ -16,14 +16,20 @@
 </div>
 
 <div id ="container">
-
 <div id='title'>
 	<h1> chomp.er </h1>
 </div>
-
+<% if logged_in? == false %>
+<div class="alert">  
+  <a class="close" data-dismiss="alert">×</a>  
+  Please log in or sign up!
+</div>
+<% end %>
 <div id='text-field'>
 <%= form_for @shortener do |f| %>
  	<%= f.text_field :url, :value => 'http://' %>
+    <%= "Customize Your Link?" %></br>
+    <%= f.text_field :vanity_url %></br>
  	
  	<%= f.submit class:"btn btn-medium btn-primary", type:"submit", value:"chomp it", name:"commit" %>
  <% end %>
@@ -33,7 +39,8 @@
           <tr>  
             <th>Original URL</th>  
             <th>Shortened Link</th>  
-            <th>Visit Count</th>  
+            <th>Vanity Link</th> 
+            <th>Visit Count</th>
           </tr>  
         </thead>  
         <tbody>
@@ -41,7 +48,9 @@
           <tr>  
             <td><%= url.url %></td>  
             <td><%= link_to("#{url.short_url}", "http://localhost:3000/#{url.short_url}") %> </td>  
+            <td><%= link_to("chomp.er/#{url.vanity_url}", "http://localhost:3000/#{url.short_url}") %></td>
             <td><%= url.visit_count %></td> 
+            
           </tr>
         <% end %>
         </tbody>  

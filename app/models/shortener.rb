@@ -1,12 +1,12 @@
 class Shortener < ActiveRecord::Base
-  attr_accessible :url, :short_url, :visit_count, :user_id
+  attr_accessible :url, :vanity_url, :short_url, :visit_count, :user_id
   validates_format_of :url, :with => /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
-  validates_presence_of :user_id
+  # validates_presence_of :user_id
   belongs_to :user
 	scope :recent, order("created_at desc").limit(5)
 
   def shortener
-  	 self.short_url = 'http://localhost:3000/' + (('a'..'z').to_a + (0..9).to_a).shuffle[0..2].join
+  	self.short_url = (('a'..'z').to_a + (0..9).to_a).shuffle[0..2].join
   end
 
   def incrementer

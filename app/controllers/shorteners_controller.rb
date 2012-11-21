@@ -22,14 +22,19 @@ class ShortenersController < ApplicationController
   end
 
   def create
-    shortener_params = params[:shortener]
-    shortener_params[:user_id] = current_user.id
-    @shortener = Shortener.new(shortener_params) 
-    @shortener.shortener
-    if @shortener.save
-      redirect_to shorteners_path 
+    if logged_in?
+      shortener_params = params[:shortener]
+      shortener_params[:user_id] = current_user.id
+      @shortener = Shortener.new(shortener_params) 
+      @shortener.shortener
+      if @shortener.save
+        redirect_to shorteners_path 
+      else
+        flash[:notice] = "Please log in or sign up!"
+        redirect_to shorteners_path
+      end
     else
-      flash[:notice] = "Please log in or sign up!"
+      flash[:notice] = "NO"
       redirect_to shorteners_path
     end
   end
