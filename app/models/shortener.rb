@@ -6,7 +6,11 @@ class Shortener < ActiveRecord::Base
 	scope :recent, order("created_at desc").limit(5)
 
   def shortener
-  	self.short_url = (('a'..'z').to_a + (0..9).to_a).shuffle[0..2].join
+  	if self.vanity_url == ""
+      self.short_url = (('a'..'z').to_a + (0..9).to_a).shuffle[0..2].join
+    else
+      self.short_url = self.vanity_url
+    end
   end
 
   def incrementer

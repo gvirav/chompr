@@ -3,11 +3,10 @@ class ShortenersController < ApplicationController
 
   def index
     @shortener = Shortener.new
-    if logged_in?
-      @shorteners = current_user.shorteners
-    else
-      @shorteners = Shortener.recent
-    end
+    # if logged_in?
+    #   @shorteners = current_user.shorteners
+    # else
+    @shorteners = Shortener.recent    
   end
 
   def show
@@ -21,10 +20,8 @@ class ShortenersController < ApplicationController
     @shortener = Shortener.find(params[:id])
   end
 
-  def create
-    if logged_in?
-      shortener_params = params[:shortener]
-      shortener_params[:user_id] = current_user.id
+  def create    
+      shortener_params = params[:shortener]      
       @shortener = Shortener.new(shortener_params) 
       @shortener.shortener
       if @shortener.save
@@ -32,11 +29,12 @@ class ShortenersController < ApplicationController
       else
         flash[:notice] = "Please log in or sign up!"
         redirect_to shorteners_path
-      end
-    else
-      flash[:notice] = "NO"
-      redirect_to shorteners_path
-    end
+      end    
   end
 
+  def destroy
+    @shortener = Shortener.find(params[:id])
+    @shortener.delete
+    redirect_to shorteners_path
+  end
 end
