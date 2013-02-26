@@ -42,9 +42,9 @@
           <tr>  
             <td><%= url.url %></td>
             <% if url.vanity_url == "" %>
-            <td><%= link_to("chomp.er/#{url.short_url}", "http://localhost:3000/#{url.short_url}", :target => "_blank") %></td>
+            <td><%= link_to("chom.pr/#{url.short_url}", "http://localhost:3000/#{url.short_url}", :target => "_blank") %></td>
             <% else %>
-            <td><%= link_to("chomp.er/#{url.vanity_url}", "http://localhost:3000/#{url.vanity_url}", :target => "_blank") %></td>
+            <td><%= link_to("chom.pr/#{url.vanity_url}", "http://localhost:3000/#{url.vanity_url}", :target => "_blank") %></td>
             <% end %>
             <td><%= url.visit_count %></td>
             <td><%= button_to "Delete", url, :method => :delete, class: "btn btn-small btn-primary" %></td>
